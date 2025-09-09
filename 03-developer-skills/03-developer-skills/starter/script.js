@@ -557,3 +557,313 @@ console.log("Systematic debugging process successfully applied!");
 console.log(
   "All bugs identified, isolated, investigated, fixed, and prevented"
 );
+
+// Developer Skills Hour 4 - Advanced Problem-Solving & Real-World Challenges
+"use strict";
+
+console.log("=== HOUR 4: ADVANCED PROBLEM-SOLVING MASTERY ===");
+
+/*
+Your Developer Transformation Today:
+Hour 1: Professional tools and environment ✅
+Hour 2: Problem-solving framework and mindset ✅  
+Hour 3: Research and debugging mastery ✅
+Hour 4: Apply everything to real challenges
+
+You're now solving unfamiliar problems independently.
+*/
+
+console.log("Ready to tackle complex problems using systematic approaches");
+console.log("Challenge: Build solutions that work under pressure");
+
+////////////////////////////////////
+// WEATHER FORECAST CHALLENGE
+
+/*
+4-STEP PROBLEM-SOLVING FRAMEWORK:
+
+STEP 1: UNDERSTAND - input array → formatted output string
+STEP 2: SUB-PROBLEMS - loop, build string, concatenate, log
+STEP 3: RESEARCH - template literals for formatting
+STEP 4: IMPLEMENT - write function
+*/
+
+function printForecast(arr) {
+  let forecastStr = "";
+
+  for (let i = 0; i < arr.length; i++) {
+    forecastStr += `...${arr[i]}°C in ${i + 1} days`;
+  }
+
+  console.log(forecastStr + "...");
+}
+
+// Test 1
+printForecast([17, 21, 23]);
+// Expected: "...17°C in 1 days...21°C in 2 days...23°C in 3 days..."
+
+// Test 2
+printForecast([12, 5, -5, 0, 4]);
+// Expected: "...12°C in 1 days...5°C in 2 days...-5°C in 3 days...0°C in 4 days...4°C in 5 days..."
+
+const data1 = [17, 21, 23];
+const data2 = [12, 5, -5, 0, 4];
+
+function printForecast(arr) {
+  if (!Array.isArray(arr)) {
+    console.error("printForecast: input must be an array");
+    return;
+  }
+  if (arr.length === 0) {
+    console.log("...");
+    return;
+  }
+
+  let result = "...";
+  for (let i = 0; i < arr.length; i++) {
+    result += `${arr[i]}°C in ${i + 1} days...`;
+  }
+
+  console.log(result);
+}
+
+printForecast(data1);
+// Expected: "...17°C in 1 days...21°C in 2 days...23°C in 3 days..."
+
+printForecast(data2);
+// Expected: "...12°C in 1 days...5°C in 2 days...-5°C in 3 days...0°C in 4 days...4°C in 5 days..."
+
+console.log("Weather forecast formatter working correctly!");
+
+// ALTERNATIVE IMPLEMENTATIONS
+
+// Alternative 1 - Using array methods instead of loops
+function printForecastMap(arr) {
+  const formatted = arr.map((temp, index) => `${temp}°C in ${index + 1} days`);
+  console.log("..." + formatted.join(" ... ") + " ...");
+}
+
+// Alternative 2 - Single line approach using reduce
+function printForecastReduce(arr) {
+  const result = arr.reduce(
+    (acc, temp, index) => acc + `${temp}°C in ${index + 1} days ... `,
+    "..."
+  );
+  console.log(result);
+}
+
+// Test alternative approaches
+console.log("Testing alternative implementations:");
+printForecastMap(data1);
+printForecastReduce(data1);
+
+// ⏱️ Section 2: Time-Pressured Challenge
+// analyzeWorkWeek(dailyHours)
+// Input: Array of 7 numbers (hours for Mon..Sun)
+// Returns an object with:
+//  - totalHours
+//  - averageDailyHours (rounded to 2 decimals)
+//  - dayWithMostHours: { index, dayName, hours }
+//  - daysWorked (count of days with hours > 0)
+//  - isFullTime (boolean, total >= 35)
+
+function analyzeWorkWeek(dailyHours) {
+  const DAYS = [
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+    "Sunday",
+  ];
+
+  if (!Array.isArray(dailyHours) || dailyHours.length !== 7) {
+    throw new TypeError("dailyHours must be an array of 7 numbers");
+  }
+
+  let totalHours = 0;
+  let maxHours = -Infinity;
+  let maxIndex = -1;
+  let daysWorked = 0;
+
+  for (let i = 0; i < 7; i++) {
+    const h = dailyHours[i];
+
+    if (typeof h !== "number" || !Number.isFinite(h) || h < 0) {
+      throw new TypeError(
+        `dailyHours[${i}] must be a non-negative finite number. Received: ${h}`
+      );
+    }
+
+    totalHours += h;
+
+    if (h > maxHours) {
+      maxHours = h;
+      maxIndex = i;
+    }
+
+    if (h > 0) daysWorked++;
+  }
+
+  const averageDailyHours = Number((totalHours / 7).toFixed(2));
+  const isFullTime = totalHours >= 35;
+
+  return {
+    totalHours,
+    averageDailyHours,
+    dayWithMostHours: {
+      index: maxIndex, // 0-based (0 = Monday)
+      dayName: DAYS[maxIndex],
+      hours: maxHours,
+    },
+    daysWorked,
+    isFullTime,
+  };
+}
+
+// Example usage
+const sample = [7.5, 8, 6.5, 0, 8.5, 4, 0];
+console.log(analyzeWorkWeek(sample));
+
+
+////////////////////////////////////
+// TIME-PRESSURED CHALLENGE: Work Hours Analyzer
+
+/*
+JOB INTERVIEW SIMULATION:
+10-minute challenge to analyze freelancer work week
+Stay systematic even under pressure!
+*/
+
+function analyzeWorkWeek(dailyHours) {
+  // Total hours worked
+  const totalHours = dailyHours.reduce((sum, hours) => sum + hours, 0);
+
+  // Average daily hours (rounded to 1 decimal)
+  const averageHours = Math.round((totalHours / dailyHours.length) * 10) / 10;
+
+  // Day with maximum hours
+  const maxHours = Math.max(...dailyHours);
+  const maxDayIndex = dailyHours.indexOf(maxHours);
+  const days = [
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+    "Sunday",
+  ];
+  const maxDay = days[maxDayIndex];
+
+  // Number of days worked
+  const daysWorked = dailyHours.filter((hours) => hours > 0).length;
+
+  // Full-time check (>= 35 hours)
+  const isFullTime = totalHours >= 35;
+
+  return {
+    totalHours,
+    averageHours,
+    maxDay,
+    daysWorked,
+    isFullTime,
+  };
+}
+
+// Test data
+const weeklyHours = [7.5, 8, 6.5, 0, 8.5, 4, 0];
+const analysis = analyzeWorkWeek(weeklyHours);
+console.log("Work week analysis:", analysis);
+
+
+console.log("Challenge completed under time pressure!");
+
+////////////////////////////////////
+// FINAL INTEGRATION: Debug and Enhance Legacy Code
+//
+// - Fixed indexing / loop bugs from legacy implementation
+// - Added input validation and robust handling of non-number values
+// - Enhanced with optional config: unit (C/F), logging, custom day names
+// - Returns the formatted string and (by default) logs it
+////////////////////////////////////
+
+function legacyForecastFunction(temperatures, options = {}) {
+  const {
+    unit = "C", // "C" or "F"
+    log = true, // whether to console.log the result
+    includeTrailingDots = true, // keep leading/trailing "..."
+    dayNames = null, // optional array of day names to use instead of "1 day/2 days"
+  } = options;
+
+  // Input validation
+  if (!Array.isArray(temperatures)) {
+    throw new TypeError("legacyForecastFunction: temperatures must be an array");
+  }
+
+  // Empty array -> return minimal result
+  if (temperatures.length === 0) {
+    const empty = includeTrailingDots ? "..." : "";
+    if (log) console.log(empty);
+    return empty;
+  }
+
+  // Helper: convert Celsius -> Fahrenheit (keeps one decimal)
+  const cToF = (c) => Number((c * 9 / 5 + 32).toFixed(1));
+
+  const parts = [];
+
+  for (let i = 0; i < temperatures.length; i++) {
+    const raw = temperatures[i];
+    let temp = null;
+
+    // Accept numbers and numeric strings (trimmed)
+    if (typeof raw === "number" && Number.isFinite(raw)) {
+      temp = raw;
+    } else if (typeof raw === "string" && raw.trim() !== "" && !Number.isNaN(Number(raw))) {
+      temp = Number(raw.trim());
+    }
+
+    const dayLabel = Array.isArray(dayNames) && dayNames[i]
+      ? dayNames[i]
+      : `${i + 1} ${i + 1 === 1 ? "day" : "days"}`;
+
+    if (temp === null) {
+      // Mark invalid/missing entries clearly
+      parts.push(`N/A in ${dayLabel}`);
+    } else {
+      const displayTemp = unit === "F" ? cToF(temp) : temp;
+      const unitSymbol = unit === "F" ? "°F" : "°C";
+      parts.push(`${displayTemp}${unitSymbol} in ${dayLabel}`);
+    }
+  }
+
+  const result = "..." + parts.join("...") + (includeTrailingDots ? "..." : "");
+
+  if (log) console.log(result);
+  return result;
+}
+
+/* ---------- Tests ---------- */
+
+const testData = [15, 18, 22, 19];
+console.log("Buggy function output (fixed):");
+legacyForecastFunction(testData);
+
+// Additional tests demonstrating robustness/enhancements
+legacyForecastFunction([15, "18", null, "abc", 21], { unit: "C" });
+// Using Fahrenheit and custom day names
+legacyForecastFunction([15, 18, 22, 19], {
+  unit: "F",
+  dayNames: ["Mon", "Tue", "Wed", "Thu"]
+});
+
+// Empty input
+legacyForecastFunction([], { log: true });
+
+// Return value capture (no log)
+const str = legacyForecastFunction([10, 20], { log: false });
+console.log("Returned string (no auto-log):", str);
+
+
