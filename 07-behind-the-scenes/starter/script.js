@@ -75,23 +75,71 @@
 
 // };
 
-const functionTypes = {
-    regular: function () {
-        console.log('Arguments length:', arguments.length);
-        console.log('First argument:', arguments[0]);
-    }, 
-    
-    arrowFunction: () => {
-        // Arrow functions do not have their own 'arguments' object
-        console.log('Arrow function called');
-    },
+//  const functionTypes = {
+//      regular: function () {
+//      console.log('Arguments length:', arguments.length);
+//    console.log('First argument:', arguments[0]);     }, 
+//        arrowFunction: () => {
+//          // Arrow functions do not have their own 'arguments' object
+//       console.log('Arrow function called');
+//     },
+// };
+
+// functionTypes.regular('hello', 'world');
+// functionTypes.arrowFunction('hello', 'world'); 
+
+
+// let age = 30; 
+// let oldAge = age;
+
+// age = 31;
+
+// console.log('age', age);
+// console.log('oldAge', oldAge);
+
+// const me = { name: 'Claire', age: 22 };
+
+// const friend = me;
+
+// friend.name = 'JohnDoe';
+// friend.age = 23;
+
+// console.log('me:', me);
+// console.log('friend:', friend);
+
+
+// const original = {
+//     name:'Alice',
+//     age: 28,
+//     hobbies: ['reading', 'coding'],
+
+// };
+
+// const shallowCopy = { ...original};
+
+// shallowCopy.name = 'Bob';
+// console.log('Original name:', original.name);
+// console.log('copy name:', shallowCopy.name);
+
+// shallowCopy.hobbies.push('gaming');
+// console.log(original.hobbies);
+// console.log(shallowCopy.hobbies);
+
+const deepOriginal = {
+    name: 'Charlie',
+    age: 32,
+    address: { city: 'Paris', country: 'France'},
+
+    hobbies: ['travel', 'photography'],
+
 };
 
-functionTypes.regular('hello', 'world');
-functionTypes.arrowFunction('hello', 'world'); 
+const deepCopy = structuredClone(deepOriginal);
+deepCopy.address.city = 'London';
+deepCopy.hobbies.push('cooking');
+deepCopy.name = 'Lex';
 
-
-
-
+console.log(deepOriginal);
+console.log(deepCopy);
 
 
