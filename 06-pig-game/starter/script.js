@@ -56,3 +56,85 @@ console.log('Current Score:', currentScore);
 console.log('Active Player:', activePlayer);
 console.log('Playing:', playing);
 
+
+// Create our switchPlayer function
+const switchPlayer = function () {
+  // Reset current score for the active player
+  document.getElementById(`current--${activePlayer}`).textContent = 0;
+    currentScore = 0;
+
+     activePlayer = activePlayer === 0 ? 1 : 0;
+
+  // Toggle the active class on both players
+  player0El.classList.toggle('player--active');
+  player1El.classList.toggle('player--active');
+};
+
+// Updated roll dice functionality
+btnRoll.addEventListener('click', function () {
+  if (playing) {
+    const dice = Math.trunc(Math.random() * 6) + 1;
+    diceEl.classList.remove('hidden');
+    diceEl.src = `dice-${dice}.png`;
+
+    if (dice !== 1) {
+      currentScore += dice;
+      document.getElementById(`current--${activePlayer}`).textContent =
+        currentScore;
+    } else {
+      // Use our new switchPlayer function
+      switchPlayer();
+    }
+  }
+});
+
+// Select the hold button
+const btnHold = document.querySelector('.btn--hold');
+
+// Hold functionality
+btnHold.addEventListener('click', function () {
+  if (playing) {
+    // Add current score to active player's total score
+    score[activePlayer] += currentScore;
+
+    // Update the display
+    document.getElementById(`score--${activePlayer}`).textContent =
+      score[activePlayer];
+
+    // Switch to next player
+    switchPlayer();
+  }
+});
+
+// Add this test code to verify everything works
+console.log('Scores array:', score);
+console.log('Current score:', currentScore);
+console.log('Active player:', activePlayer);
+
+console.log(
+  'Player 0 has active class:',
+  player0El.classList.contains('player--active')
+);
+console.log(
+  'Player 1 has active class:',
+  player1El.classList.contains('player--active')
+);
+
+btnHold.addEventListener('click', function () {
+  if (playing && currentScore > 0) {
+    // Add current score to active player's score
+    score[activePlayer] += currentScore;
+    document.getElementById(`score--${activePlayer}`).textContent =
+      score[activePlayer];
+
+    // Switch to next player
+    switchPlayer();
+  }
+});
+
+console.log('Scores:', score);
+console.log('Current Score:', currentScore);
+console.log('Active Player:', activePlayer);
+console.log('Playing:', playing);
+console.log('Player 0 active:', player0El.classList.contains('player--active'));
+console.log('Player 1 active:', player1El.classList.contains('player--active'));
